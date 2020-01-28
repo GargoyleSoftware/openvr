@@ -3,8 +3,13 @@ package(default_visibility = ["//visibility:public"])
 cc_library(
     name = "libopenvr_api",
     srcs = [
-        "lib/linux64/libopenvr_api.so"
+        # Linux
+        #"lib/linux64/libopenvr_api.so"
         #"bin/linux64/libopenvr_api.so"
+
+        # Win32
+        "lib/win64/openvr_api.lib"
+        #"bin/win64/openvr_api.dll"
         ],
     #hdrs = glob([ "headers/*.h" ]), [
     hdrs = [
