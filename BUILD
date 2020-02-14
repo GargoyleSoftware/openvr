@@ -1,17 +1,16 @@
 package(default_visibility = ["//visibility:public"])
 
 cc_import(
-    name = "bin",
+    name = "win32dep",
     static_library = "lib/win64/openvr_api.lib",
     shared_library = "bin/win64/openvr_api.dll",
-    # Linux
-    #"lib/linux64/libopenvr_api.so"
-    #"bin/linux64/libopenvr_api.so"
+    )
 
-    #hdrs = glob([ "headers/*.h" ]), [
-    #hdrs = [ 'headers/openvr_capi.h', 'headers/openvr_driver.h', 'headers/openvr.h', #'headers/openvr_api.cs', #'headers/openvr_api.json', ],
-    # deps = [ ':hdrs', ],
-  )
+cc_library(
+    name = "linuxdep",
+    hdrs = [ ],
+    srcs = [ "lib/linux64/libopenvr_api.so", ],
+    )
 
 cc_library(
     name = "libopenvr_api",
@@ -24,9 +23,8 @@ cc_library(
         'headers',
     ],
     strip_include_prefix = "headers",
-    deps = [
-        ':bin',
-    ],
+    deps = select({
+        "//platforms:linux": [ ':linuxdep' ],
+        "//platforms:win32": [ ':win32dep' ],
+        })
     )
-
-
