@@ -2,8 +2,8 @@ package(default_visibility = ["//visibility:public"])
 
 cc_import(
     name = "win32dep",
-    static_library = "lib/win64/openvr_api.lib",
-    shared_library = "bin/win64/openvr_api.dll",
+    interface_library = "lib/win64/openvr_api.lib",
+    shared_library    = "bin/win64/openvr_api.dll",
     )
 
 cc_library(
