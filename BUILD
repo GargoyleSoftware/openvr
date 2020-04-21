@@ -13,6 +13,23 @@ cc_library(
     )
 
 cc_library(
+    name = "openvr_api",
+    hdrs = [
+      'headers/openvr_capi.h',
+      'headers/openvr_driver.h',
+      'headers/openvr.h',
+    ],
+    includes = [
+        'headers',
+    ],
+    strip_include_prefix = "headers",
+    deps = select({
+        "//platforms:linux": [ ':linuxdep' ],
+        "//platforms:win32": [ ':win32dep' ],
+        })
+    )
+
+cc_library(
     name = "libopenvr_api",
     hdrs = [
       'headers/openvr_capi.h',
